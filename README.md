@@ -4,7 +4,9 @@ Quand un créneau dispo est trouvé, l'app émet un signal sonore et ouvre le navig
 En théorie cela fonctionne sous Windows, Mac et Linux.
 
 # Bien démarrer
-Editez le fichier Program.cs avec l'URL correspondant à votre ville. Si vous souhaitez ignorer les créneaux de certains centres de vaccination, vous pouvez les mentionner dans la variable centersToIgnore
+1. Si ce n'est pas déjà fait, installer le SDK dotnet core correspondant à votre système depuis ici : https://dotnet.microsoft.com/download
+2. Editez le fichier Program.cs avec l'URL correspondant à votre ville (variable `doctolibSearchUrl`). Si vous souhaitez ignorer les créneaux de certains centres de vaccination, vous pouvez les mentionner dans la variable `centersToIgnore`.
+3. Depuis un terminal ou une invite de commande dans le répertoire cloné, lancez la commande `dotnet run` et laissez la magie opérer ;) 
 
 # Quelques conseils
 Ce n'est certainement pas le bout de code dont je suis le plus fier mais il a rempli son rôle.
