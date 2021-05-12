@@ -44,19 +44,18 @@ namespace doctolibsniper
 
                         if (result.Availabilities.Any())
                         {
-                            if(!ShouldBeIgnored(result.SearchResult.LastName))
+                            if (!ShouldBeIgnored(result.SearchResult.LastName))
                             {
                                 found = true;
                                 Console.Beep();
                                 Console.WriteLine("{0} RDV Dispo {1} => https://www.doctolib.fr{2}", result.Total, result.SearchResult.LastName, result.SearchResult.Url);
-                                OpenBrowser(String.Format("https://www.doctolib.fr{0}", result.SearchResult.Url));
-                                Thread.Sleep(10000);
-                            } else
+                                OpenBrowser(string.Format("https://www.doctolib.fr{0}", result.SearchResult.Url));
+                                Thread.Sleep(10000);//Pause de 10sec pour remplir le formulaire et éviter les faux positifs
+                            }
+                            else
                             {
                                 Console.WriteLine("Créneaux disponibles ignorés dans le centre suivant : {0}", result.SearchResult.LastName);
-
                             }
-
                         }
                     }
                 }
@@ -118,12 +117,11 @@ namespace doctolibsniper
                 var pattern = "search-result-(\\d+)";
                 var matches = Regex.Matches(stringResult, pattern);
 
-                foreach (var match in matches)
+                foreach (Match match in matches)
                 {
-                    string centerId = match.ToString().Replace("search-result-", "");
+                    string centerId = match.Groups[1].Value;
                     urlList.Add(string.Format("https://www.doctolib.fr/search_results/{0}.json?limit=7&ref_visit_motive_ids%5B%5D=6970&ref_visit_motive_ids%5B%5D=7005&speciality_id=5494&search_result_format=json&force_max_limit=2", centerId));
                 }
-
             }
 
             return urlList;
