@@ -18,16 +18,25 @@ namespace doctolibsniper
         {
             "Tonneins",
             "Libournais",
-            "Biscarosse",
             "Castillon",
             "Margaux",
-            "Astier"
+            "Médard",
+            "Lacanau",
+        };
+
+        public static readonly List<string> centerDepartmentToIgnore = new List<string>
+        {
+            "24",
+            "40",
+            "17"
         };
 
         public static void Main(string[] args)
         {
             Console.WriteLine("URL surveillée : " + doctolibSearchUrl);
             Console.WriteLine("Centres ignorés : " + string.Join(", ", centersToIgnore));
+            Console.WriteLine("Départements ignorés : " + string.Join(", ", centerDepartmentToIgnore));
+
             while (true)
             {
                 var found = false;
@@ -44,7 +53,7 @@ namespace doctolibsniper
 
                         if (result.Availabilities.Any())
                         {
-                            if (!ShouldBeIgnored(result.SearchResult.LastName))
+                            if (!ShouldBeIgnored(result.SearchResult))
                             {
                                 found = true;
                                 Console.Beep();
@@ -96,8 +105,15 @@ namespace doctolibsniper
             }
         }
 
-        static bool ShouldBeIgnored(string centerName)
+        static bool ShouldBeIgnored(SearchResult center)
         {
+            var centerName = center.LastName;
+
+            foreach (var dpt in centerDepartmentToIgnore)
+            {
+                if (center.Zipcode.StartsWith(dpt)) return true;
+            }
+
             foreach (var ctrPartName in centersToIgnore)
             {
                 if (centerName.Contains(ctrPartName, StringComparison.InvariantCultureIgnoreCase)) return true;
