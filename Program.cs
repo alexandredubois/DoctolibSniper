@@ -24,18 +24,19 @@ namespace doctolibsniper
             "Lacanau",
         };
 
-        public static readonly List<string> centerDepartmentToIgnore = new List<string>
+        public static readonly List<string> centerDepartmentsToIgnore = new List<string>
         {
             "24",
             "40",
-            "17"
+            "17",
+            "33390"
         };
 
         public static void Main(string[] args)
         {
             Console.WriteLine("URL surveillée : " + doctolibSearchUrl);
             Console.WriteLine("Centres ignorés : " + string.Join(", ", centersToIgnore));
-            Console.WriteLine("Départements ignorés : " + string.Join(", ", centerDepartmentToIgnore));
+            Console.WriteLine("Départements ignorés : " + string.Join(", ", centerDepartmentsToIgnore));
 
             while (true)
             {
@@ -109,7 +110,7 @@ namespace doctolibsniper
         {
             var centerName = center.LastName;
 
-            foreach (var dpt in centerDepartmentToIgnore)
+            foreach (var dpt in centerDepartmentsToIgnore)
             {
                 if (center.Zipcode.StartsWith(dpt)) return true;
             }
