@@ -77,15 +77,6 @@ namespace doctolibsniper.Models
         [JsonProperty("booking_temporary_disabled")]
         public bool BookingTemporaryDisabled { get; set; }
 
-        [JsonProperty("resetVisitMotive")]
-        public bool ResetVisitMotive { get; set; }
-
-        [JsonProperty("toFinalizeStep")]
-        public bool ToFinalizeStep { get; set; }
-
-        [JsonProperty("toFinalizeStepWithoutState")]
-        public bool ToFinalizeStepWithoutState { get; set; }
-
         [JsonProperty("url")]
         public string Url { get; set; }
     }
